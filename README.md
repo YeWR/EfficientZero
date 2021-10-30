@@ -9,7 +9,7 @@ If you find this repo useful, please cite our paper:
 @inproceedings{ye2021mastering,
   title={Mastering Atari Games with Limited Data},
   author={Weirui Ye, and Shaohuai Liu, and Thanard Kurutach, and Pieter Abbeel, and Yang Gao},
-  booktitle={Advances in Neural Information Processing Systems},
+  booktitle={NeurIPS},
   year={2021}
 }
 ```
