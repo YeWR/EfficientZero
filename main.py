@@ -97,7 +97,7 @@ if __name__ == '__main__':
             test_score, test_path = test(game_config, model.to(device), total_steps, game_config.test_episodes,
                                          device, render=False, save_video=args.save_video, final_test=True, use_pb=True)
             mean_score = test_score.mean()
-            std_score = np.sqrt(test_score.var())
+            std_score = test_score.std()
 
             test_log = {
                 'mean_score': mean_score,
@@ -124,7 +124,7 @@ if __name__ == '__main__':
             test_score, test_path = test(game_config, model, 0, args.test_episodes, device=device, render=args.render,
                                          save_video=args.save_video, final_test=True, use_pb=True)
             mean_score = test_score.mean()
-            std_score = np.sqrt(test_score.var())
+            std_score = test_score.std()
             logging.getLogger('test').info('Test Mean Score: {} (max: {}, min: {})'.format(mean_score, test_score.max(), test_score.min()))
             logging.getLogger('test').info('Test Std Score: {}'.format(std_score))
             if args.save_video:

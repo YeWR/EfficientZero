@@ -68,6 +68,10 @@ If you wan to apply EfficientZero to a new environment like `mujoco`. Here are t
 2. Implement your `MujocoConfig(BaseConfig)` class and implement the models as well as your environment wrapper.
 3. Register the case at `main.py`.
 
+## Results 
+Evaluation with 32 seeds for 3 different runs (different seeds).
+![](static/imgs/total_results.png)
+
 ## Citation
 If you find this repo useful, please cite our paper:
 ```

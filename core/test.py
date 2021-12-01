@@ -30,7 +30,7 @@ def _test(config, shared_storage):
 
             test_score, _ = test(config, test_model, counter, config.test_episodes, config.device, False, save_video=False)
             mean_score = test_score.mean()
-            std_score = np.sqrt(test_score.var())
+            std_score = test_score.std()
             print('Start evaluation at step {}.'.format(counter))
             if mean_score >= best_test_score:
                 best_test_score = mean_score
