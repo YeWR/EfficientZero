@@ -1,8 +1,7 @@
 import torch
 
-from baselines.common.atari_wrappers import WarpFrame, EpisodicLifeEnv
 from core.config import BaseConfig
-from core.utils import make_atari
+from core.utils import make_atari, WarpFrame, EpisodicLifeEnv
 from core.dataset import Transforms
 from .env_wrapper import AtariWrapper
 from .model import EfficientZeroNet
