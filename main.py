@@ -52,6 +52,7 @@ if __name__ == '__main__':
     parser.add_argument('--info', type=str, default='none', help='debug string')
     parser.add_argument('--load_model', action='store_true', default=False, help='choose to load model')
     parser.add_argument('--model_path', type=str, default='./results/test_model.p', help='load model path')
+    parser.add_argument('--object_store_memory', type=int, default=150 * 1024 * 1024 * 1024, help='object store memory')
 
     # Process arguments
     args = parser.parse_args()
@@ -61,7 +62,7 @@ if __name__ == '__main__':
 
     if args.opr == 'train':
         ray.init(num_gpus=args.num_gpus, num_cpus=args.num_cpus,
-                 object_store_memory=150 * 1024 * 1024 * 1024)
+                 object_store_memory=args.object_store_memory)
     else:
         ray.init()
 
