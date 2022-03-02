@@ -7,7 +7,7 @@ EfficientZero requires python3 (>=3.6) and pytorch (>=1.8.0) with the developmen
 We recommend to use torch amp (`--amp_type torch_amp`) to accelerate training.
 
 ### Prerequisites
-Before starting training, you need to build the c++/cython style external packages.
+Before starting training, you need to build the c++/cython style external packages. (GCC version 7.5+ is required.)
 ```
 cd core/ctree
 bash make.sh
