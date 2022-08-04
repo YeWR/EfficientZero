@@ -32,7 +32,8 @@ class ReplayBuffer(object):
         for (game, priorities) in pools:
             # Only append end game
             # if end_tag:
-            self.save_game(game, True, gap_step, priorities)
+            if len(game) > 0:
+                self.save_game(game, True, gap_step, priorities)
 
     def save_game(self, game, end_tag, gap_steps, priorities=None):
         """Save a game history block

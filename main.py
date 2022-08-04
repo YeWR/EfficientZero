@@ -32,7 +32,7 @@ if __name__ == '__main__':
                         help='Overrides past results (default: %(default)s)')
     parser.add_argument('--cpu_actor', type=int, default=14, help='batch cpu actor')
     parser.add_argument('--gpu_actor', type=int, default=20, help='batch bpu actor')
-    parser.add_argument('--p_mcts_num', type=int, default=8, help='number of parallel mcts')
+    parser.add_argument('--p_mcts_num', type=int, default=4, help='number of parallel mcts')
     parser.add_argument('--seed', type=int, default=0, help='seed (default: %(default)s)')
     parser.add_argument('--num_gpus', type=int, default=4, help='gpus available')
     parser.add_argument('--num_cpus', type=int, default=80, help='cpus available')
@@ -95,8 +95,7 @@ if __name__ == '__main__':
             model, weights = train(game_config, summary_writer, model_path)
             model.set_weights(weights)
             total_steps = game_config.training_steps + game_config.last_steps
-            test_score, test_path = test(game_config, model.to(device), total_steps, game_config.test_episodes,
-                                         device, render=False, save_video=args.save_video, final_test=True, use_pb=True)
+            test_score, _, test_path = test(game_config, model.to(device), total_steps, game_config.test_episodes, device, render=False, save_video=args.save_video, final_test=True, use_pb=True)
             mean_score = test_score.mean()
             std_score = test_score.std()
 
@@ -122,8 +121,7 @@ if __name__ == '__main__':
 
             model = game_config.get_uniform_network().to(device)
             model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
-            test_score, test_path = test(game_config, model, 0, args.test_episodes, device=device, render=args.render,
-                                         save_video=args.save_video, final_test=True, use_pb=True)
+            test_score, _, test_path = test(game_config, model, 0, args.test_episodes, device=device, render=args.render, save_video=args.save_video, final_test=True, use_pb=True)
             mean_score = test_score.mean()
             std_score = test_score.std()
             logging.getLogger('test').info('Test Mean Score: {} (max: {}, min: {})'.format(mean_score, test_score.max(), test_score.min()))

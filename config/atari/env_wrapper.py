@@ -21,6 +21,9 @@ class AtariWrapper(Game):
     def legal_actions(self):
         return [_ for _ in range(self.env.action_space.n)]
 
+    def get_max_episode_steps(self):
+        return self.env.get_max_episode_steps()
+
     def step(self, action):
         observation, reward, done, info = self.env.step(action)
         observation = observation.astype(np.uint8)

@@ -160,9 +160,9 @@ def update_weights(model, batch, optimizer, replay_buffer, config, scaler, vis_r
                     other_loss['consist_' + str(step_i + 1)] = temp_loss.mean().item()
                     consistency_loss += temp_loss
 
-                policy_loss += -(torch.log_softmax(policy_logits, dim=1) * target_policy[:, step_i + 1]).sum(1)
-                value_loss += config.scalar_value_loss(value, target_value_phi[:, step_i + 1])
-                value_prefix_loss += config.scalar_reward_loss(value_prefix, target_value_prefix_phi[:, step_i])
+                policy_loss += -(torch.log_softmax(policy_logits, dim=1) * target_policy[:, step_i + 1]).sum(1) * mask_batch[:, step_i]
+                value_loss += config.scalar_value_loss(value, target_value_phi[:, step_i + 1]) * mask_batch[:, step_i]
+                value_prefix_loss += config.scalar_reward_loss(value_prefix, target_value_prefix_phi[:, step_i]) * mask_batch[:, step_i]
                 # Follow MuZero, set half gradient
                 hidden_state.register_hook(lambda grad: grad * 0.5)
 
@@ -215,9 +215,9 @@ def update_weights(model, batch, optimizer, replay_buffer, config, scaler, vis_r
                 other_loss['consist_' + str(step_i + 1)] = temp_loss.mean().item()
                 consistency_loss += temp_loss
 
-            policy_loss += -(torch.log_softmax(policy_logits, dim=1) * target_policy[:, step_i + 1]).sum(1)
-            value_loss += config.scalar_value_loss(value, target_value_phi[:, step_i + 1])
-            value_prefix_loss += config.scalar_reward_loss(value_prefix, target_value_prefix_phi[:, step_i])
+            policy_loss += -(torch.log_softmax(policy_logits, dim=1) * target_policy[:, step_i + 1]).sum(1) * mask_batch[:, step_i]
+            value_loss += config.scalar_value_loss(value, target_value_phi[:, step_i + 1]) * mask_batch[:, step_i]
+            value_prefix_loss += config.scalar_reward_loss(value_prefix, target_value_prefix_phi[:, step_i]) * mask_batch[:, step_i]
             # Follow MuZero, set half gradient
             hidden_state.register_hook(lambda grad: grad * 0.5)
 

@@ -344,12 +344,13 @@ class BatchWorker_GPU(object):
             value_lst = value_lst * np.array(value_mask)
             value_lst = value_lst.tolist()
 
-            horizon_id, value_index = 0, 0
+            value_index = 0
             for traj_len_non_re, reward_lst, state_index in zip(traj_lens, rewards_lst, state_index_lst):
                 # traj_len = len(game)
                 target_values = []
                 target_value_prefixs = []
 
+                horizon_id = 0
                 value_prefix = 0.0
                 base_index = state_index
                 for current_index in range(state_index, state_index + self.config.num_unroll_steps + 1):

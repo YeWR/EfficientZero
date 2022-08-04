@@ -1,8 +1,7 @@
 numpy==1.19.5
 ray==1.0.0
-gym==0.15.7
-atari-py==0.2.6
+gym[atari,roms,accept-rom-license]==0.15.7
 cython==0.29.23
 tensorboard
-opencv-python
-kornia
+opencv-python==4.5.1.48
+kornia==0.6.6

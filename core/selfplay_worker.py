@@ -109,7 +109,7 @@ class DataWorker(object):
         model.eval()
 
         start_training = False
-        envs = [self.config.new_game(self.config.seed + self.rank * i) for i in range(env_nums)]
+        envs = [self.config.new_game(self.config.seed + (self.rank + 1) * i) for i in range(env_nums)]
 
         def _get_max_entropy(action_space):
             p = 1.0 / action_space

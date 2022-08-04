@@ -19,7 +19,7 @@ class AtariConfig(BaseConfig):
             checkpoint_interval=100,
             target_model_interval=200,
             save_ckpt_interval=10000,
-            max_moves=108000,
+            max_moves=12000,
             test_max_moves=12000,
             history_length=400,
             discount=0.997,
@@ -84,9 +84,9 @@ class AtariConfig(BaseConfig):
 
     def visit_softmax_temperature_fn(self, num_moves, trained_steps):
         if self.change_temperature:
-            if trained_steps < 0.5 * (self.training_steps + self.last_steps):
+            if trained_steps < 0.5 * (self.training_steps):
                 return 1.0
-            elif trained_steps < 0.75 * (self.training_steps + self.last_steps):
+            elif trained_steps < 0.75 * (self.training_steps):
                 return 0.5
             else:
                 return 0.25
